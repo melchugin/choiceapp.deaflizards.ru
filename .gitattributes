@@ -1,0 +1,11 @@
+* text eol=lf
+schema.key binary
+*.png binary
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.dat filter=lfs diff=lfs merge=lfs -text
+*.hdf5 binary
+*.h5 filter=lfs diff=lfs merge=lfs -text

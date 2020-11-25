@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  choiceapp-db:
+    build: db
+    image: choiceapp/db:dev
+    container_name: choiceapp-db
+    env_file: db/.env
+    ports:
+      - 5432:5432
+    restart: on-failure
+
+  choiceapp-core:
+    build: core
+    image: choiceapp/core:dev
+    container_name: choiceapp-core
+    env_file: core/.env
+    ports:
+      - 9090:9090
+    restart: on-failure
+    depends_on:
+      - choiceapp-db
+
+  choiceapp-backend:
+    build: backend
+    image: choiceapp/backend:dev
+    container_name: choiceapp-backend
+    env_file: backend/.env
+    ports:
+      - 3000:3000
+    restart: on-failure
+    depends_on:
+      - choiceapp-db
+  # choiceapp-frontend:
+  #   build: frontend
+  #   image: choiceapp/frontend:dev
+  #   container_name: choiceapp-frontend
+  #   # env_file: core/.env
+  #   ports:
+  #     - 8080:8080
+  #   restart: on-failure
+  #   depends_on:
+  #     - choiceapp-backend
+# networks:
+#   default:
+#     external:
+#       name: nginx_http-dev-net
