@@ -28,7 +28,8 @@ jobs:
       - name: Push dev Docker images
         if: github.event_name == 'push'
         run: |
-          docker images --format "{{.Repository}}" | while read IMAGE; do
+          docker images --format "{{.Repository}}" | while read line; do
+            IMAGE=$(echo $line | awk -F ":" '{print $1}')
             docker tag $IMAGE $IMAGE_ID/$IMAGE:$GITHUB_SHA
             docker push $IMAGE_ID/$IMAGE
           done
