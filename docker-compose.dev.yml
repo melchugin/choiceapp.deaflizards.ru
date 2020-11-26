@@ -3,7 +3,7 @@ version: "3.7"
 services:
   choiceapp-db:
     build: db
-    image: choiceapp-db:dev
+    image: ghcr.io/melchugin/choiceapp-db:dev
     container_name: choiceapp-db
     env_file: db/.env.test
     ports:
@@ -12,7 +12,7 @@ services:
 
   choiceapp-core:
     build: core
-    image: choiceapp-core:dev
+    image: ghcr.io/melchugin/choiceapp-core:dev
     container_name: choiceapp-core
     env_file: core/.env.test
     ports:
@@ -23,7 +23,7 @@ services:
 
   choiceapp-backend:
     build: backend
-    image: choiceapp-backend:dev
+    image: ghcr.io/melchugin/choiceapp-backend:dev
     container_name: choiceapp-backend
     env_file: backend/.env.test
     ports:
@@ -33,7 +33,7 @@ services:
       - choiceapp-db
   # choiceapp-frontend:
   #   build: frontend
-  #   image: choiceapp-frontend:dev
+  #   image: ghcr.io/melchugin/choiceapp-frontend:dev
   #   container_name: choiceapp-frontend
   #   # env_file: core/.env.test
   #   ports:
