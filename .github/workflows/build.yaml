@@ -1,0 +1,35 @@
+name: Docker image CI (build)
+
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+
+env:
+  IMAGE_ID: ghcr.io/${{ github.repository_owner }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker images
+        run: |
+          docker-compose -f docker-compose.dev.yml build --compress --force-rm --parallel --pull
+        # TODO: run tests
+      - name: Login to GitHub Container Registry
+        if: github.event_name == 'push'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Push dev Docker images
+        if: github.event_name == 'push'
+        run: |
+          docker images | while read line; do
+            IMAGE=$(echo $line | awk '{print $1}')
+            docker tag $IMAGE $IMAGE_ID/$IMAGE:$GITHUB_SHA
+            docker push $IMAGE_ID/$IMAGE
+          done
