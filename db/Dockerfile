@@ -1,5 +1,7 @@
 FROM postgres:13.1
 
+LABEL org.opencontainers.image.source https://github.com/melchugin/choiceapp.deaflizards.ru
+
 COPY *.sql /docker-entrypoint-initdb.d/
 
 ENV POSTGRES_DB=deaflizards

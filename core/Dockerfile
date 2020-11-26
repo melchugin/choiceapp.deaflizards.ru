@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+LABEL org.opencontainers.image.source https://github.com/melchugin/choiceapp.deaflizards.ru
+
 # Install system packages
 RUN apt-get update \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \

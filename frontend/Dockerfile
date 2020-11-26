@@ -1,5 +1,7 @@
 FROM node:15.3-stretch
 
+LABEL org.opencontainers.image.source https://github.com/melchugin/choiceapp.deaflizards.ru
+
 # Enable russian locale
 RUN apt-get update \
         && DEBIAN_FRONTEND=noninteractive apt-get install -y \
