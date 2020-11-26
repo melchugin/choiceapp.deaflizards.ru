@@ -5,7 +5,7 @@ services:
     build: db
     image: choiceapp-db:dev
     container_name: choiceapp-db
-    env_file: db/.env
+    env_file: db/.env.test
     ports:
       - 5432:5432
     restart: on-failure
@@ -14,7 +14,7 @@ services:
     build: core
     image: choiceapp-core:dev
     container_name: choiceapp-core
-    env_file: core/.env
+    env_file: core/.env.test
     ports:
       - 9090:9090
     restart: on-failure
@@ -25,7 +25,7 @@ services:
     build: backend
     image: choiceapp-backend:dev
     container_name: choiceapp-backend
-    env_file: backend/.env
+    env_file: backend/.env.test
     ports:
       - 3000:3000
     restart: on-failure
@@ -35,7 +35,7 @@ services:
   #   build: frontend
   #   image: choiceapp-frontend:dev
   #   container_name: choiceapp-frontend
-  #   # env_file: core/.env
+  #   # env_file: core/.env.test
   #   ports:
   #     - 8080:8080
   #   restart: on-failure
