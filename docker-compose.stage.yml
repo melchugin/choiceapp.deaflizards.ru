@@ -6,6 +6,8 @@ services:
     image: ghcr.io/melchugin/choiceapp-db:stage
     container_name: choiceapp-db-stage
     env_file: db/.env.stage
+    volumes:
+      - choiceapp-db:/var/lib/postgresql/data/pgdata
 
   choiceapp-backend:
     build: backend
@@ -31,6 +33,9 @@ services:
     restart: on-failure
     depends_on:
       - choiceapp-bff
+
+volumes:
+  choiceapp-db:
 
 networks:
   default:
