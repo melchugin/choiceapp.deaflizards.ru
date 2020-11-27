@@ -92,7 +92,6 @@ def vectorizator(X:np.array):
     return vec
 
 X = vectorizator(X)
-
 ```
 
 Модель обучалась около 2 часов. Результаты обучения:
