@@ -1,6 +1,6 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
-const CORE = process.env.CORE || "http://choiceapp-core:9090";
+const CORE = process.env.CORE || "http://choiceapp-core:9191";
 const axios = require('axios');
 const bodyParser = require('body-parser'); //connects bodyParsing middleware
 

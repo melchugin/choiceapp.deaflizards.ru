@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+    choiceapp-db:
+        build: db
+        image: ghcr.io/melchugin/choiceapp-db:ci
+        container_name: choiceapp-db-ci
+        env_file: db/.env.ci
+        ports:
+            - 5432:5432
+
+    choiceapp-core:
+        build: core
+        image: ghcr.io/melchugin/choiceapp-core:ci
+        container_name: choiceapp-core-ci
+        env_file: core/.env.ci
+        ports:
+            - 9191:9191
+        depends_on:
+            - choiceapp-db
+
+    choiceapp-backend:
+        build: backend
+        image: ghcr.io/melchugin/choiceapp-backend:ci
+        container_name: choiceapp-backend-ci
+        env_file: backend/.env.ci
+        restart: on-failure
+        ports:
+            - 3000:3000
+        depends_on:
+            - choiceapp-db
+    choiceapp-frontend:
+        build: frontend
+        image: ghcr.io/melchugin/choiceapp-frontend:ci
+        container_name: choiceapp-frontend-ci
+        env_file: core/.env.ci
+        restart: on-failure
+        depends_on:
+            - choiceapp-backend

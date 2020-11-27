@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  choiceapp-db:
+    build: db
+    image: ghcr.io/melchugin/choiceapp-db:stage
+    container_name: choiceapp-db-stage
+    env_file: db/.env.stage
+
+  choiceapp-core:
+    build: core
+    image: ghcr.io/melchugin/choiceapp-core:stage
+    container_name: choiceapp-core-stage
+    env_file: core/.env.stage
+    depends_on:
+      - choiceapp-db
+
+  choiceapp-backend:
+    build: backend
+    image: ghcr.io/melchugin/choiceapp-backend:stage
+    container_name: choiceapp-backend-stage
+    env_file: backend/.env.stage
+    restart: on-failure
+    depends_on:
+      - choiceapp-db
+  choiceapp-frontend:
+    build: frontend
+    image: ghcr.io/melchugin/choiceapp-frontend:stage
+    container_name: choiceapp-frontend-stage
+    env_file: core/.env.stage
+    restart: on-failure
+    depends_on:
+      - choiceapp-backend
+
+networks:
+  default:
+    external:
+      name: stage-net

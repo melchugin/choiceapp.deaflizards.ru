@@ -2,7 +2,7 @@ from .handler import CoreTCPHandler, MasterTCPServer
 from .utils import log
 
 HOST = "0.0.0.0"
-PORT = 9090
+PORT = 9191
 
 if __name__ == "__main__":
     logger = log.get(__name__)

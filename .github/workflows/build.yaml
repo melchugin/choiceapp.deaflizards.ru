@@ -1,4 +1,4 @@
-name: Docker image dev CI
+name: Docker image stage CI
 
 on:
   push:
@@ -7,23 +7,38 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker images
         run: |
-          docker-compose -f docker-compose.dev.yml build --compress --force-rm --parallel --pull
-        # TODO: run tests
+          docker-compose -f docker-compose.ci.yml build --compress --force-rm --parallel --pull
+      - name: Run tests
+        run: |
+          RESULT=curl -s -X POST --data '{"data_id": 9}' http://localhost:3000/api/v1/test_get | jq .data_id
+          echo "Got result: $RESULT"
+          [ -z "$RESULT" ] && exit 1
+
+  build:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker images
+        run: |
+          touch {db,backend,core,db,frontend}/.env.stage
+          docker-compose -f docker-compose.stage.yml build --compress --force-rm --parallel --pull
       - name: Login to GitHub Container Registry
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
       - name: Push dev Docker images
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
         run: |
           docker images --format "{{.Repository}}:{{.Tag}}" ghcr.io/${{ github.repository_owner }}/choiceapp-* | while read IMAGE; do
             IMAGE_ID=$(echo $IMAGE | awk -F ":" '{print $1}')
@@ -31,7 +46,7 @@ jobs:
             docker push $IMAGE_ID
           done
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
     needs:
       - build
     runs-on: ubuntu-latest
@@ -45,10 +60,10 @@ jobs:
           DEPLOY_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
       - name: Deply to dev stand
         run: |
-          ssh -i /tmp/deploy_key -p $DEPLOY_PORT -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.dev.yml pull && docker-compose -f docker-compose.dev.yml up --force-recreate --no-build --detach"
+          ssh -i /tmp/deploy_key -p $DEPLOY_PORT -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.stage.yml pull && docker-compose -f docker-compose.stage.yml up --force-recreate --no-build --detach"
           rm -f /tmp/deploy_key
         env:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_DEV_PATH }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_STAGE_PATH }}
