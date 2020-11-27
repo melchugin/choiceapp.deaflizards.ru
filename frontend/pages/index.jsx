@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-//const BACKEND = "http://choiceapp-backend:3000";
-const BACKEND = "http://backend:3000";
+const BACKEND = "http://choiceapp-backend:3000";
 
 const MainPage = () => {
     const [data, setData] = useState('Waiting...')
