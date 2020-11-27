@@ -64,12 +64,17 @@ X = np.hstack([positive["ttext"].values[:50000] , negative["ttext"].values[:5000
 y = (np.hstack([positive["ttype"].values[:50000] , negative["ttype"].values[:50000]]) + 1) / 2
 y = np.eye(2)[y.reshape(-1).astype(np.int8)]
 
-def vectorizator(X:np.array):
+def vectorizator(X:np.array, max_lenth=None):
     tokens = []
-    max_lenth = 0
+    if max_lenth == None:
+        max_lenth = 0
+        flag_to_compute = True
+    else:
+        flag_to_compute = False
+        
     for i in X:
         tokens.append(word_tokenize(''.join( c for c in re.sub(r'', '', i) if  c not in '.,!()-:?' )))
-        if len(tokens[-1]) > max_lenth:
+        if flag_to_compute == True and len(tokens[-1]) > max_lenth:
             max_lenth = len(tokens[-1])
     
     print(f"Максимальная длинна сообщения: {max_lenth}")
@@ -97,3 +102,21 @@ X = vectorizator(X)
 Модель обучалась около 2 часов. Результаты обучения:
 
 ![alt text](research/train_info.svg "Train info")
+
+Применение модели (при обучении длинна входной последовательности `max_lenth` = 18):
+
+```python
+from keras.models import load_model
+sentiment_predictor = load_model("research/sentiment_predictor")
+
+text = [
+    u"Самая тупая работа, лучше б и не приходил, ненависть!",
+    u"Обожаю вашу компанию, хочу работать только у вас!"
+]
+new_entry = vectorizator(text, 18)
+
+predict = sentiment_predictor.predict_classes(new_entry)
+
+prediction_encode = {0: "Негативная окраска", 1: "Позитивная окраска"}
+print(f"{text[0]} -- {prediction_encode[predict[0]]}\n{text[1]} -- {prediction_encode[1]}")
+```
