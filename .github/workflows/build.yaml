@@ -7,29 +7,13 @@ on:
   pull_request:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build Docker images
-        run: |
-          docker-compose -f docker-compose.ci.yml build --compress --force-rm --parallel --pull
-      - name: Run tests
-        run: |
-          docker-compose -f docker-compose.ci.yml up --no-build --detach
-          RESULT=$(curl -s -X POST --data '{"data_id": 9}' http://localhost:3000/api/v1/test_get | jq .data_id)
-          echo "Got result: $RESULT"
-          [ -z "$RESULT" ] && exit 1
-
   build:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Build Docker images
         run: |
-          touch {db,backend,core,db,frontend}/.env.stage
+          touch {db,backend,bff,frontend}/.env.stage
           docker-compose -f docker-compose.stage.yml build --compress --force-rm --parallel --pull
       - name: Login to GitHub Container Registry
         if: github.event_name == 'push' && github.ref == 'refs/heads/stage'
