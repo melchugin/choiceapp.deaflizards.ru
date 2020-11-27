@@ -40,7 +40,7 @@ docker-compose up
 * `nltk`
 * `navec`
 
-Модель обучалась на базе русскоязычных твиттов. Датасет: https://study.mokoron.com/. В основе лежит LSTM-сеть и несколько полносвязных слоев слоёв. Модель сохранена в формате keras в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находятся веса, в виде `dict`, ключи:
+Модель обучалась на базе русскоязычных твиттов. Датасет: https://study.mokoron.com/. В основе лежит LSTM-сеть и несколько полносвязных слоёв. Модель сохранена в формате `keras`\`а в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находятся веса, в виде `dict`, ключи:
 * `loss` - ошибка на обучающих данных (Categorical Crossentropy)
 * `val_loss` - ошибка на валидационных данных (Categorical Crossentropy)
 * `acc` - точность на обучении
@@ -68,8 +68,8 @@ positive['ttext'] = positive['ttext'].apply((lambda x: re.sub('[^a-zA-z0-9\s]','
 negative['ttext'] = negative['ttext'].apply(lambda x: x.lower())
 negative['ttext'] = negative['ttext'].apply((lambda x: re.sub('[^a-zA-z0-9\s]','',x)))
 
-X = np.hstack([positive["ttext"].values[:50000] , negative["ttext"].values[:50000]])
-y = (np.hstack([positive["ttype"].values[:50000] , negative["ttype"].values[:50000]]) + 1) / 2
+X = np.hstack([positive["ttext"].values , negative["ttext"].values)
+y = (np.hstack([positive["ttype"].values , negative["ttype"].values) + 1) / 2
 y = np.eye(2)[y.reshape(-1).astype(np.int8)]
 
 def vectorizator(X:np.array, max_lenth=None):
@@ -128,3 +128,26 @@ predict = sentiment_predictor.predict_classes(new_entry)
 prediction_encode = {0: "Негативная окраска", 1: "Позитивная окраска"}
 print(f"{text[0]} -- {prediction_encode[predict[0]]}\n{text[1]} -- {prediction_encode[1]}")
 ```
+
+Для понимания работы модели необходимо выделять входные слова, наиболее повлиявшие на оценку. Ввиду обучения модели на твитах достаточно низкая точность на текстах резюме. Проблема решается дообучением на текстах из предметной области. Подсвечивание слов по которым определяется настроение текста, производится по следующей логике: берется оценка всего текста, затем каждое слово "выкидывается", результат сортируется по возрастанию вероятности классификации. Таким образом можно оценить влияние каждого конкретного слова на результат. Пример применения:
+
+```python
+
+text = "Сильные способности, на прошлом месте работы надоело, начальник негодяй!"
+
+def predictor_mark_words(model, text: str):
+    vec = vectorizator([text], 18)   
+    for w in text.split(" "):
+        temp_text = ''.join([str(c) + " " for c in text.split(" ") if  c != w])
+        vec = np.vstack([vec, vectorizator([temp_text], 18, verbose=False)])
+    predict = sentiment_predictor.predict_proba(vec)
+    res = np.argmax(a[0])
+    marks = predict[1:, res].argsort()[-3:]
+    return np.asarray(text.split(" "))[marks]
+
+predictor_mark_words(sentiment_predictor, text)
+```
+
+Результат работы функции:
+
+`array(['начальник', 'негодяй!', 'надоело,'], dtype='<U12')`
