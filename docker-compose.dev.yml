@@ -31,16 +31,16 @@ services:
     restart: on-failure
     depends_on:
       - choiceapp-db
-  # choiceapp-frontend:
-  #   build: frontend
-  #   image: ghcr.io/melchugin/choiceapp-frontend:dev
-  #   container_name: choiceapp-frontend
-  #   # env_file: core/.env.test
-  #   ports:
-  #     - 8080:8080
-  #   restart: on-failure
-  #   depends_on:
-  #     - choiceapp-backend
+  choiceapp-frontend:
+    build: frontend
+    image: ghcr.io/melchugin/choiceapp-frontend:dev
+    container_name: choiceapp-frontend
+    env_file: core/.env.test
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - choiceapp-backend
 # networks:
 #   default:
 #     external:

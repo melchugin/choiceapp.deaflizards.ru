@@ -41,7 +41,7 @@ jobs:
           DEPLOY_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
       - name: Deply to prod
         run: |
-          ssh -i /tmp/deploy.key -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up --force-recreate --no-build --detach"
+          ssh -i /tmp/deploy.key -p $DEPLOY_PORT -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.yml pull && docker-compose -f docker-compose.yml up --force-recreate --no-build --detach"
           rm -f /tmp/deploy.key
         env:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
