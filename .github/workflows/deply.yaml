@@ -9,6 +9,7 @@ on:
       - .gitignore
       - .gitattributes
       - .editorconfig
+      - research
 
 jobs:
   build:
