@@ -27,12 +27,12 @@ docker-compose up
 ### Модель для определения эмоциональной окраски текста
 
 Зависимости:
-* `tensorflow` 2
+* `tensorflow >= 2` 
 * `keras`
 * `nltk`
 * `navec`
 
-Модель обучалась на базе русскоязычных твиттов. В основе лежит LSTM-сеть и несколько полносвязных слоев слоёв. Модель сохранена в формате keras в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находятся веса, в виде `dict`, ключи:
+Модель обучалась на базе русскоязычных твиттов. Датасет: https://study.mokoron.com/. В основе лежит LSTM-сеть и несколько полносвязных слоев слоёв. Модель сохранена в формате keras в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находятся веса, в виде `dict`, ключи:
 * `loss` - ошибка на обучающих данных (Categorical Crossentropy)
 * `val_loss` - ошибка на валидационных данных (Categorical Crossentropy)
 * `acc` - точность на обучении
@@ -95,5 +95,6 @@ X = vectorizator(X)
 
 ```
 
-[Ссылка на датасет]: https://study.mokoron.com/
+Модель обучалась около 2 часов. Результаты обучения:
 
+![alt text](research/train_info.svg "Train info")
