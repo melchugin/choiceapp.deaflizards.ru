@@ -27,6 +27,9 @@ jobs:
         run: |
           docker images --format "{{.Repository}}:{{.Tag}}" choiceapp-* | while read IMAGE; do
             IMAGE_ID=$(echo $IMAGE | awk -F ":" '{print $1}')
+            echo "$IMAGE -> $IMAGE_ID"
             docker tag $IMAGE $IMAGE_ID:$GITHUB_SHA
+            echo "Push $IMAGE_ID"
             docker push $IMAGE_ID
           done
+          docker images
