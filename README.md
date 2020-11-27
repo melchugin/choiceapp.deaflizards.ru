@@ -92,7 +92,6 @@ def vectorizator(X:np.array):
     return vec
 
 X = vectorizator(X)
-
 ```
 
 [Ссылка на датасет]: https://study.mokoron.com/
