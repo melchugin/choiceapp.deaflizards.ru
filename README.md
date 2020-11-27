@@ -40,7 +40,7 @@ docker-compose up
 * `nltk`
 * `navec`
 
-Модель обучалась на базе русскоязычных твиттов. Датасет: https://study.mokoron.com/. В основе лежит LSTM-сеть и несколько полносвязных слоёв. Модель сохранена в формате `keras`\`а в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находятся веса, в виде `dict`, ключи:
+Модель обучалась на базе русскоязычных твиттов. Датасет: https://study.mokoron.com/. В основе лежит LSTM-сеть и несколько полносвязных слоёв. Модель сохранена в формате `keras`\`а в файле `research/sentiment_predictor`. Обучалась на GPU, в файле `research/train_history.pickle` находится история обучения, в виде `dict`, ключи:
 * `loss` - ошибка на обучающих данных (Categorical Crossentropy)
 * `val_loss` - ошибка на валидационных данных (Categorical Crossentropy)
 * `acc` - точность на обучении
@@ -133,7 +133,7 @@ print(f"{text[0]} -- {prediction_encode[predict[0]]}\n{text[1]} -- {prediction_e
 
 ```python
 
-text = "Сильные способности, на прошлом месте работы надоело, начальник негодяй!"
+text = "Хотелось бы работать в развивающейся компании"
 
 def predictor_mark_words(model, text: str):
     vec = vectorizator([text], 18)   
@@ -145,9 +145,10 @@ def predictor_mark_words(model, text: str):
     marks = predict[1:, res].argsort()[-3:]
     return np.asarray(text.split(" "))[marks]
 
-predictor_mark_words(sentiment_predictor, text)
+result = predictor_mark_words(sentiment_predictor, text)
+print(result, prediction_encode[sentiment_predictor.predict_classes(vectorizator([text], 18))[0]])
 ```
 
 Результат работы функции:
 
-`array(['начальник', 'негодяй!', 'надоело,'], dtype='<U12')`
+`['развивающейся' 'компании' 'работать'] Позитивная окраска`
