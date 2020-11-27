@@ -4,7 +4,17 @@ on:
   push:
     branches-ignore:
       - master
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - .gitattributes
+      - .editorconfig
   pull_request:
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - .gitattributes
+      - .editorconfig
 
 jobs:
   build:

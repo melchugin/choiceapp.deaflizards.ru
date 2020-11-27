@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - .gitattributes
+      - .editorconfig
 
 jobs:
   build:
