@@ -8,15 +8,6 @@ services:
     env_file: db/.env
     restart: always
 
-  choiceapp-core:
-    build: core
-    image: ghcr.io/melchugin/choiceapp-core:prod
-    container_name: choiceapp-core
-    env_file: core/.env
-    restart: always
-    depends_on:
-      - choiceapp-db
-
   choiceapp-backend:
     build: backend
     image: ghcr.io/melchugin/choiceapp-backend:prod
@@ -25,14 +16,23 @@ services:
     restart: always
     depends_on:
       - choiceapp-db
+
+  choiceapp-bff:
+    build: bff
+    image: ghcr.io/melchugin/choiceapp-bff:prod
+    container_name: choiceapp-bff
+    env_file: bff/.env
+    restart: always
+    depends_on:
+      - choiceapp-db
   choiceapp-frontend:
     build: frontend
     image: ghcr.io/melchugin/choiceapp-frontend:prod
     container_name: choiceapp-frontend
-    env_file: core/.env
+    env_file: frontend/.env
     restart: always
     depends_on:
-      - choiceapp-backend
+      - choiceapp-bff
 
 networks:
   default:

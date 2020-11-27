@@ -16,7 +16,7 @@ jobs:
           docker-compose -f docker-compose.ci.yml build --compress --force-rm --parallel --pull
       - name: Run tests
         run: |
-          RESULT=curl -s -X POST --data '{"data_id": 9}' http://localhost:3000/api/v1/test_get | jq .data_id
+          RESULT=$(curl -s -X POST --data '{"data_id": 9}' http://localhost:3000/api/v1/test_get | jq .data_id)
           echo "Got result: $RESULT"
           [ -z "$RESULT" ] && exit 1
 

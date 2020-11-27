@@ -7,19 +7,19 @@ services:
     container_name: choiceapp-db-stage
     env_file: db/.env.stage
 
-  choiceapp-core:
-    build: core
-    image: ghcr.io/melchugin/choiceapp-core:stage
-    container_name: choiceapp-core-stage
-    env_file: core/.env.stage
-    depends_on:
-      - choiceapp-db
-
   choiceapp-backend:
     build: backend
     image: ghcr.io/melchugin/choiceapp-backend:stage
     container_name: choiceapp-backend-stage
     env_file: backend/.env.stage
+    depends_on:
+      - choiceapp-db
+
+  choiceapp-bff:
+    build: bff
+    image: ghcr.io/melchugin/choiceapp-bff:stage
+    container_name: choiceapp-bff-stage
+    env_file: bff/.env.stage
     restart: on-failure
     depends_on:
       - choiceapp-db
@@ -27,10 +27,10 @@ services:
     build: frontend
     image: ghcr.io/melchugin/choiceapp-frontend:stage
     container_name: choiceapp-frontend-stage
-    env_file: core/.env.stage
+    env_file: frontend/.env.stage
     restart: on-failure
     depends_on:
-      - choiceapp-backend
+      - choiceapp-bff
 
 networks:
   default:

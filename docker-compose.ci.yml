@@ -9,20 +9,20 @@ services:
         ports:
             - 5432:5432
 
-    choiceapp-core:
-        build: core
-        image: ghcr.io/melchugin/choiceapp-core:ci
-        container_name: choiceapp-core-ci
-        env_file: core/.env.ci
+    choiceapp-backend:
+        build: backend
+        image: ghcr.io/melchugin/choiceapp-backend:ci
+        container_name: choiceapp-backend-ci
+        env_file: backend/.env.ci
         ports:
             - 9191:9191
         depends_on:
             - choiceapp-db
 
-    choiceapp-backend:
-        build: backend
-        image: ghcr.io/melchugin/choiceapp-backend:ci
-        container_name: choiceapp-backend-ci
+    choiceapp-bff:
+        build: bff
+        image: ghcr.io/melchugin/choiceapp-bff:ci
+        container_name: choiceapp-bff-ci
         env_file: backend/.env.ci
         restart: on-failure
         ports:
@@ -33,7 +33,7 @@ services:
         build: frontend
         image: ghcr.io/melchugin/choiceapp-frontend:ci
         container_name: choiceapp-frontend-ci
-        env_file: core/.env.ci
+        env_file: frontend/.env.ci
         restart: on-failure
         depends_on:
-            - choiceapp-backend
+            - choiceapp-bff
