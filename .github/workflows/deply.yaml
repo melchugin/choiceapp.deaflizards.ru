@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Docker images
         run: |
+          touch {db,backend,core,db,frontend}/.env
           docker-compose -f docker-compose.yml build --compress --force-rm --parallel --pull
         # TODO: run tests
       - name: Login to GitHub Container Registry
@@ -35,7 +36,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Prepare ssh key
         run: |
-          echo $DEPLOY_PRIVATE_KEY > /tmp/deploy.key
+          echo "$DEPLOY_PRIVATE_KEY" > /tmp/deploy.key
           chmod 600 /tmp/deploy.key
         env:
           DEPLOY_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
