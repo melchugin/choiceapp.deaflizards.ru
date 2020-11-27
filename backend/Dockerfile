@@ -43,7 +43,7 @@ RUN python3 -m pip install --upgrade pip \
 
 # Run the application
 COPY core2 ./core2
-EXPOSE 9090/tcp
+EXPOSE 9191/tcp
 CMD ["python3", "-m", "core2"]
 
 HEALTHCHECK --interval=5m --timeout=90s --start-period=60s --retries=1 CMD \
