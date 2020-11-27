@@ -39,14 +39,14 @@ jobs:
       - uses: actions/checkout@v2
       - name: Prepare ssh key
         run: |
-          echo $DEPLOY_PRIVATE_KEY > /tmp/deploy.key
-          chmod 600 /tmp/deploy.key
+          echo -n $DEPLOY_PRIVATE_KEY > /tmp/deploy_key
+          chmod 600 /tmp/deploy_key
         env:
           DEPLOY_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
       - name: Deply to dev stand
         run: |
-          ssh -i /tmp/deploy.key -p $DEPLOY_PORT -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.dev.yml pull && docker-compose -f docker-compose.dev.yml up --force-recreate --no-build --detach"
-          rm -f /tmp/deploy.key
+          ssh -i /tmp/deploy_key -p $DEPLOY_PORT -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git pull && docker-compose -f docker-compose.dev.yml pull && docker-compose -f docker-compose.dev.yml up --force-recreate --no-build --detach"
+          rm -f /tmp/deploy_key
         env:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
