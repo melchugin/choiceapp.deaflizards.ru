@@ -1,4 +1,4 @@
-const positions = [
+const positions = () => ([
     {
         id: 0,
         name: 'Дизайнер интерфейсов',
@@ -28,6 +28,7 @@ const positions = [
         id: 0,
         name: '123',
         icon: '/vac1.png'
-    }];
+    }
+]);
 
 export default positions;
