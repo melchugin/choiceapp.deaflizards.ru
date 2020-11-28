@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const BFF = process.env.BFF || "http://choiceapp-bff:3000";
+const BFF = process.env.BFF || "http://choiceapp-bff-dev:3000";
 
 const MainPage = () => {
     const [data, setData] = useState('Waiting...')
