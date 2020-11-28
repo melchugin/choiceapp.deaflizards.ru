@@ -1,12 +1,18 @@
 import React from 'react';
 
+import Avatar from '@material-ui/core/Avatar';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+
 import css from './styles.less';
 
 const photoSrc = [
-    "/vac1.png",
-    "/vac2.png",
-    "/vac3.png",
-    "/vac4.png"
+    "photos/1.svg",
+    "photos/2.svg",
+    "photos/3.svg",
+    "photos/4.svg",
+    "photos/2.svg",
+    "photos/3.svg",
+    "photos/1.svg",
 ];
 
 const VacancyCard = (props) =>
@@ -16,12 +22,13 @@ const VacancyCard = (props) =>
             <span className={css.additional}>{props.additional}</span>
         </div>
         <div className={css.photosWrapper}>
+        <AvatarGroup max={4}>
             {photoSrc.map(PhotoItem)}
-            <div className={css.morePhotos}>+6</div>
+        </AvatarGroup>
         </div>
     </div>
 
 const PhotoItem = (src, i) =>
-    <img className={css.photo} src={src} key={i} style={{ transform: `translateX(${12*i}px)` }}/>
+    <Avatar src={src} />
 
 export default VacancyCard;
