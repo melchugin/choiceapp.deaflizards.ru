@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  choiceapp-db-dev:
+    build: db
+    env_file: db/.env
+    ports:
+    - 5432:5432
+    volumes:
+      - choiceapp-db:/var/lib/postgresql/data
+
+  choiceapp-backend-dev:
+    build: backend
+    env_file: backend/.env
+    depends_on:
+      - choiceapp-db-dev
+
+  choiceapp-bff-dev:
+    build: bff
+    command: npm start
+    env_file: bff/.env
+    depends_on:
+      - choiceapp-backend-dev
+
+  choiceapp-frontend-dev:
+    build: frontend
+    command: npm start
+    env_file: frontend/.env
+    depends_on:
+      - choiceapp-bff-dev
+
+volumes:
+  choiceapp-db:
+
+networks:
+  default:
+    external:
+      name: ingress
