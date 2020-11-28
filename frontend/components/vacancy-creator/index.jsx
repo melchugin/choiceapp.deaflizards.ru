@@ -37,7 +37,7 @@ const VacancyCreator = (props) =>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <Button />
     </div>
 
@@ -48,12 +48,3 @@ const StatedInput = withInput(Input);
 const ListWithState = withStateObject(EditableList);
 
 export default VacancyCreator;
-
-const demands = {
-    caption: 'Требования',
-    items: [
-        'Доработка CRM-системы в части реализации нового функционала;',
-        'Доработка существующих и разработка новых интерфейсов для CRM-систем;',
-        'Коммуникация с заказчиками и общение с командой разработки.',
-    ]
-};
