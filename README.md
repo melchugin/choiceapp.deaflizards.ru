@@ -195,7 +195,7 @@ print(result)
 ## Аналитика по резюме
 Реализована функция совпадения текстов. Она использует следующие метрики: мера Жаккара (1) и косинусное расстояние (2), есть возможность подключить любую метрику для определения близости эмбеддингов (например из `sklearn.metrics`).
 
-<img src="https://render.githubusercontent.com/render/math?math=K_{{1,-1}}={\frac  {n(I\cap E)}{n(I)+n(E)-n(I\cap E)}}={\frac  {n(I\cap E)}{n(I\cup E)}};">&nbsp;&nbsp;&nbsp;&nbsp;(1)
+<img src="https://render.githubusercontent.com/render/math?math=K_{{1,-1}}={\frac  {n(I\cap E)}{n(I) %2B n(E)-n(I\cap E)}}={\frac  {n(I\cap E)}{n(I\cup E)}};">&nbsp;&nbsp;&nbsp;&nbsp;(1)
 
 
 <img src="https://render.githubusercontent.com/render/math?math=cos(\theta)=\frac{\sum{(I \times E)}}{\sqrt{\sum{I^2} \times \sqrt{\sum{E^2}}}},">&nbsp;&nbsp;&nbsp;&nbsp;(2)
@@ -217,9 +217,9 @@ matches = match_vacancies(test_data, test_res_data)
 
 <img src="https://render.githubusercontent.com/render/math?math=E%3DE_p-E_n\times%20K_p,">
 
-где <img src="https://render.githubusercontent.com/render/math?math=E"> - экономический эффект; <img src="https://render.githubusercontent.com/render/math?math=E_p"> - годовая экономия; <img src="https://render.githubusercontent.com/render/math?math=E_n"> - нормативный коэффициент (<img src="https://render.githubusercontent.com/render/math?math=\(E_n=\[0.05...0.2\]\)">; <img src="https://render.githubusercontent.com/render/math?math=\K_p"> - капитальные затраты на проектирование и внедрение, включая первоначальную стоимость программы. Годовая экономия <img src="https://render.githubusercontent.com/render/math?math=E_p"> складывается из экономии эксплуатационных расходов и экономии в связи с повышением производительности труда пользователя. Таким образом:
+где <img src="https://render.githubusercontent.com/render/math?math=E"> - экономический эффект; <img src="https://render.githubusercontent.com/render/math?math=E_p"> - годовая экономия; <img src="https://render.githubusercontent.com/render/math?math=E_n"> - нормативный коэффициент <img src="https://render.githubusercontent.com/render/math?math=(E_n=[0.05...0.2])">; <img src="https://render.githubusercontent.com/render/math?math=\K_p"> - капитальные затраты на проектирование и внедрение, включая первоначальную стоимость программы. Годовая экономия <img src="https://render.githubusercontent.com/render/math?math=E_p"> складывается из экономии эксплуатационных расходов и экономии в связи с повышением производительности труда пользователя. Таким образом:
 
-<img src="https://render.githubusercontent.com/render/math?math=E_p=(P_1-P_2)+\delta P_p">
+<img src="https://render.githubusercontent.com/render/math?math=E_p=(P_1-P_2)%2B \delta P_p">
 
 где <img src="https://render.githubusercontent.com/render/math?math=P_1"> и <img src="https://render.githubusercontent.com/render/math?math=P_2"> - соответственно эксплуатационные расходы до и после внедрения разрабатываемой программы; <img src="https://render.githubusercontent.com/render/math?math=\delta P_p"> - экономия от повышения производительности труда дополнительных пользователей.
 
@@ -237,7 +237,7 @@ matches = match_vacancies(test_data, test_res_data)
 
 Таким образом, годовая экономия (верхняя граница) <img src="https://render.githubusercontent.com/render/math?math=E_p"> составляет:
 
-<img src="https://render.githubusercontent.com/render/math?math=72 000 000 + 0.1 * Z_c">
+<img src="https://render.githubusercontent.com/render/math?math=72\times 10^6 %2B 0.1 * Z_c">
 
 где <img src="https://render.githubusercontent.com/render/math?math=Z_c"> - средняя зарплата IT-специалиста, положим <img src="https://render.githubusercontent.com/render/math?math=Z_c=150 000">
 
