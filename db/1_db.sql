@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb1df1fbfd4290f3cfe10cdc9a7cb86538b3233280892e05232a7d3d35a445ff
-size 102
+create table public.positions
+(
+    id          serial  not null
+        constraint positions_pk
+            primary key,
+    name        varchar not null,
+    icon        varchar not null,
+    description text
+);
+
+alter table public.positions
+    owner to postgres;
+
+create unique index positions_id_uindex
+    on public.positions (id);
+
+create table public.vacancies
+(
+    id              serial  not null,
+    position_id     integer not null,
+    description     text,
+    work_experience smallint[],
+    duties          character varying(150)[],
+    demands         character varying(150)[],
+    conditions      character varying(150)[]
+);
+
+alter table public.vacancies
+    owner to postgres;
+

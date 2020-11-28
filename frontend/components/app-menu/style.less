@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+
+@marginHor: @margin + 2;
+@marginVer: @margin - 2;
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    background: white;
+    border-radius: 8px;
+    gap: @margin;
+    padding: @marginVer @marginHor;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(0, 28, 61, 0.05);
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}

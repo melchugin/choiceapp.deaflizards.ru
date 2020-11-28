@@ -1,18 +1,12 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
-const CORE = process.env.CORE || "http://choiceapp-backend:9191";
+const CORE = process.env.CORE || "http://choiceapp-backend-dev:9191";
 const axios = require('axios');
-const bodyParser = require('body-parser'); //connects bodyParsing middleware
 
 const app = express();
-app.use(bodyParser({ defer: true }));
-app.use(bodyParser.json({ type: 'application/*+json' }));
 
 app.post(`/api/v1/test_get`, (req, res) => {
     try {
-        // console.log(444, req);
-        console.log('Incomming request')
-
         axios({
             method: `post`,
             url: CORE,
