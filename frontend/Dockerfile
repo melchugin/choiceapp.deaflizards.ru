@@ -11,10 +11,10 @@ ENV LANG=en_US.UTF-8
 
 #Prepare application files
 WORKDIR /app
-COPY . .
+#COPY . .
 
 #Install and build application
-RUN npm install --production && npm run build
+RUN npm install
 
 #Run application
-CMD ["npm", "start"]
+#CMD ["npm", "run","dev"]

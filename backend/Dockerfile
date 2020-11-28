@@ -47,4 +47,4 @@ EXPOSE 9090/tcp
 CMD ["python3", "-m", "core2"]
 
 HEALTHCHECK --interval=5m --timeout=90s --start-period=60s --retries=1 CMD \
-    && curl -s -X POST --data '{"command": "check", "data_id": 2}' http://localhost:9090/ | jq .status | grep -P ^true$
+    && curl -s -X POST --data '{"command": "check", "data_id": 2}' http://localhost:9191/ | jq .status | grep -P ^true$

@@ -19,15 +19,29 @@ services:
     build: bff
     command: npm start
     env_file: bff/.env
+    volumes:
+      - ./sftp-to-dev/data/bff:/app
     depends_on:
       - choiceapp-backend-dev
 
   choiceapp-frontend-dev:
     build: frontend
-    command: npm start
+    command: npm run dev
     env_file: frontend/.env
+    volumes:
+      - ./sftp-to-dev/data/frontend:/app
     depends_on:
       - choiceapp-bff-dev
+
+  sftp-to-dev:
+    build: sftp-to-dev
+    restart: always
+    command: /usr/sbin/sshd -D
+    volumes:
+      - ./sftp-to-dev/data/frontend:/app/frontend
+      - ./sftp-to-dev/data/bff:/app/bff
+    ports:
+      - "1181:22"
 
 volumes:
   choiceapp-db:
@@ -35,4 +49,4 @@ volumes:
 networks:
   default:
     external:
-      name: ingress
+      name: dev-net

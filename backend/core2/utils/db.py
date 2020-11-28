@@ -21,7 +21,7 @@ class DbTestInfo:
 
 
 class DBBroker:
-    DB_NAME = "deaflizards"
+    DB_NAME = "choiceapp"
 
     class DBConnection:
         def __init__(self):
