@@ -8,6 +8,7 @@ const IconInput = (props) =>
         className={css.input}
         onChange={(e) => props.setText(e.target.value)}
         value={props.text}
+        name={props.name}
     />
 
-export default IconInput; 
+export default IconInput;

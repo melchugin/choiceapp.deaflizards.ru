@@ -8,12 +8,12 @@ import css from './styles.less';
 
 const EditableList = (props) =>
     <div className={css.wrapper}>
-        <h3>{props.state.caption}</h3>
+        <h3>{props.caption}</h3>
         <ul>
-            {props.state.items.map(Item(props))}
+            {props.items.map(Item(props))}
         </ul>
-        <button className={css.addButton} 
-            onClick={props.setState({caption:props.state.caption, items: [...props.state.items, '']})}>
+        <button className={css.addButton}
+            onClick={props.add()}>
             <div className={css.iconWrapper}>
                 <img src="/addIcon.svg" />
             </div>
@@ -23,8 +23,8 @@ const EditableList = (props) =>
 
 const Item = (props) => (item, i) =>
     <li key={i}>
-        <button className={css.removeButton} 
-            onClick={props.setState({caption:props.state.caption, items: props.state.items.filter((v, index) => i !== index)})}>-</button>
+        <button className={css.removeButton}
+            onClick={props.remove(i)}>-</button>
         <StatedInput rows={1} value={item}/>
     </li>
 
