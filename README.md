@@ -1,8 +1,8 @@
 # “Цифровой Прорыв” 2020 Финал
 
-## Команда Deaf Lizards
+# Команда Deaf Lizards
 
-## Кейс Газпромбанк
+# Кейс Газпромбанк
 
 [![github workflow stage build img]][github workflow stage build]
 [![github workflow prod deploy img]][github workflow prod deploy]
@@ -27,10 +27,15 @@ docker-compose build --compress --force-rm --parallel --pull
 docker-compose up
 ```
 
-## Containers info
+# Схема взаимодействия контейнеров
 
+В проекте присутсвуют отдельные среды для тестирования, рабочий стенд и продакшн. Ниже приведена архитектура docker-контейнеров, а также внутренняя сеть.
 
-# Research / Исследование
+<p align="center">
+  <img width="1717" height="754" src="docker_schema.png">
+</p>
+
+# Исследование
 
 ## Модель для определения эмоциональной окраски текста
 
