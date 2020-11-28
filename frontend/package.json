@@ -1,20 +1,22 @@
 {
-    "name": "choiceapp-frontend",
-    "version": "1.0.0",
-    "description": "ChoiceAap Hackathon",
-    "main": "index.js",
-    "scripts": {
-        "dev": "next -p 8080",
-        "build": "next build",
-        "start": "next start -p 8080"
-    },
-    "keywords": [],
-    "author": "Bormotov Alexander",
-    "license": "GPL3",
-    "dependencies": {
-        "axios": "^0.21.0",
-        "next": "^10.0.3",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
-    }
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next -p 8080",
+    "build": "next build",
+    "start": "next start -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-less": "^1.0.1",
+    "axios": "^0.21.0",
+    "less": "^3.12.2",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
 }
