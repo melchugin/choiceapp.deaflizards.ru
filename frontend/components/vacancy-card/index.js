@@ -29,6 +29,6 @@ const VacancyCard = (props) =>
     </div>
 
 const PhotoItem = (src, i) =>
-    <Avatar src={src} />
+    <Avatar src={src} key={i}/>
 
 export default VacancyCard;

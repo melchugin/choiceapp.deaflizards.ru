@@ -1,4 +1,4 @@
-export default [
+const recentContacts = () => ([
     {
         photo: '/photos/1.svg',
         name: 'Андрей Новожилов',
@@ -23,5 +23,6 @@ export default [
         name: 'Марина Антоненко',
         desc: 'Маркетолог'
     },
+]);
 
-];
+export default recentContacts;

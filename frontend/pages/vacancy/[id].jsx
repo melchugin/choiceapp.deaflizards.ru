@@ -28,7 +28,7 @@ import css from '../../styles/regular.less';
 
 import withLink from '../../components/hocs/withLink';
 
-import responsesMock from '../mocks/responses';
+import responsesMock from '../../mocks/responses';
 
 const VacancyPage = () => {
     const [ currentPage, setCurrentPage ]= React.useState(0);
@@ -121,7 +121,7 @@ const renderResponses = (response, i) => {
 
 const Response = (props) => {
     const color = props.percentage > 50 ? props.percentage > 70 ? '#4BB34B' : '#FFA000' : '#818C99';
-    return <Box component="a" display='flex' alignItems='center'>
+    return <Box display='flex' alignItems='center'>
         <Avatar src={props.photo} style={{ width: '48px', height: '48px'}}/>
         <Box paddingLeft={1} display='flex' align-items='center' justifyContent="space-between">
             <Box>

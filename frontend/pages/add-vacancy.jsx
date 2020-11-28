@@ -12,8 +12,8 @@ import '../styles/global.less';
 import regCss from '../styles/regular.less';
 import css from './add-vacancy.less';
 
-import positions from './mocks/positions';
-import demands from './mocks/demands';
+import positions from '../mocks/positions';
+import demands from '../mocks/demands';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -103,9 +103,9 @@ const tabsSwitcher = (props) => (current) => {
     switch (current) {
         case 0: return (
             <div className={css.tabContent}>
-                <Positions positions={positions}/>
+                <Positions positions={positions()}/>
                 <Description />
-                <Demands demands={demands}/>
+                <Demands demands={demands()}/>
                 <WorkType />
                 <Publications />
                 <Button />

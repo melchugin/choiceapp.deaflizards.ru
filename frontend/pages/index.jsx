@@ -10,9 +10,9 @@ import withLink from '../components/hocs/withLink';
 import '../styles/global.less';
 import css from '../styles/regular.less';
 
-import recentContactsMock from './mocks/recent-contacts';
+import recentContactsMock from '../mocks/recent-contacts';
 
-const MainPage = () => 
+const MainPage = () =>
     <Layout return={false} pageTitle="Вакансии" addButton={true}>
             <AppMenu />
             <div className={css.pageWrapper}>
@@ -26,7 +26,7 @@ const MainPage = () =>
                 <VacancyCard title="iOS-разработчик" additional="12 откликов"/>
                 <VacancyCard title="iOS-разработчик" additional="12 откликов"/>
             </div>
-            <RecentContacts contacts={recentContactsMock}/>
+            <RecentContacts contacts={recentContactsMock()}/>
     </Layout>
 
 const VacancyCardWithLink = withLink(VacancyCard, '/vacancy/1');
