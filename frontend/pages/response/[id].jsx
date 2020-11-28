@@ -25,7 +25,7 @@ import '../../styles/global.less';
 import css from '../../styles/regular.less';
 
 const ResponsePage = () => {
-    const [ currentPage, setCurrentPage ]= React.useState(0);
+    const [ currentPage, setCurrentPage ] = React.useState(0);
     const [ expandLetter, setExpandLetter ] = React.useState(false);
     return (
         <Layout return={true} pageTitle="iOS-разработчик" addButton={false}>
