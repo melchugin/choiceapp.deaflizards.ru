@@ -31,9 +31,7 @@ docker-compose up
 
 В проекте присутсвуют отдельные среды для тестирования, рабочий стенд и продакшн. Ниже приведена архитектура docker-контейнеров, а также внутренняя сеть.
 
-<p align="center">
-  <img width="1717" height="754" src="docker_schema.png">
-</p>
+![alt text](docker_schema.png "Docker schema")
 
 # Исследование
 
