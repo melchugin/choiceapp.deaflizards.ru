@@ -201,9 +201,9 @@ print(result)
 
 где <img src="https://render.githubusercontent.com/render/math?math=E"> - экономический эффект; <img src="https://render.githubusercontent.com/render/math?math=E_p"> - годовая экономия; <img src="https://render.githubusercontent.com/render/math?math=E_n"> - нормативный коэффициент (<img src="https://render.githubusercontent.com/render/math?math=E_n=\[0.05...0.2\]">); <img src="https://render.githubusercontent.com/render/math?math=\K_p"> - капитальные затраты на проектирование и внедрение, включая первоначальную стоимость программы. Годовая экономия <img src="https://render.githubusercontent.com/render/math?math=E_p"> складывается из экономии эксплуатационных расходов и экономии в связи с повышением производительности труда пользователя. Таким образом:
 
-<img src="https://render.githubusercontent.com/render/math?Э_р=(Р_1-Р_2)+\delta Р_п">
+<img src="https://render.githubusercontent.com/render/math?math=E_p=(Р_1-Р_2)+\delta P_p">
 
-где <img src="https://render.githubusercontent.com/render/math?Р_1"> и <img src="https://render.githubusercontent.com/render/math?Р_2"> - соответственно эксплуатационные расходы до и после внедрения разрабатываемой программы; <img src="https://render.githubusercontent.com/render/math?\delta Р_п"> - экономия от повышения производительности труда дополнительных пользователей.
+где <img src="https://render.githubusercontent.com/render/math?math=P_1"> и <img src="https://render.githubusercontent.com/render/math?math=P_2"> - соответственно эксплуатационные расходы до и после внедрения разрабатываемой программы; <img src="https://render.githubusercontent.com/render/math?math=\delta P_p"> - экономия от повышения производительности труда дополнительных пользователей.
 
 **Исходные данные (из файла `Газпромбанк.pdf`), экономия до 50 тыс. на сотрудника HR в месяц**: 
 1. 4 часа в день на подготовку описания и оформление вакансии
@@ -217,23 +217,25 @@ print(result)
 **Имеджевый эффект:**
 * всем кандидатам отвечают, нет "брошенных"
 
-Таким образом, годовая экономия (верхняя граница) <img src="https://render.githubusercontent.com/render/math?Э_р"> составляет:
+Таким образом, годовая экономия (верхняя граница) <img src="https://render.githubusercontent.com/render/math?math=E_p"> составляет:
 
-<img src="https://render.githubusercontent.com/render/math?72 000 000 + 0.1 * З_c">
+<img src="https://render.githubusercontent.com/render/math?math=72 000 000 + 0.1 * Z_c">
 
-где <img src="https://render.githubusercontent.com/render/math?З_c"> - средняя зарплата IT-специалиста, положим <img src="https://render.githubusercontent.com/render/math?З_с=150 000">
+где <img src="https://render.githubusercontent.com/render/math?math=Z_c"> - средняя зарплата IT-специалиста, положим <img src="https://render.githubusercontent.com/render/math?math=Z_c=150 000">
 
-<img src="https://render.githubusercontent.com/render/math?Годовая экономия: 72015000 руб.">
+`Годовая экономия: 72015000 руб.`
 
-Нижняя граница <img src="https://render.githubusercontent.com/render/math?Э_р">:
+Нижняя граница <img src="https://render.githubusercontent.com/render/mathmath=?E_p">:
 
-<img src="https://render.githubusercontent.com/render/math?Годовая экономия: 64813500 руб.">
+`Годовая экономия: 64813500 руб.`
 
 Капитальные затраты на внедрение оцениваются как:
-<img src="https://render.githubusercontent.com/render/math?K = М \times 10^6,">
-где <img src="https://render.githubusercontent.com/render/math?M"> - количество месяцев на реализацию, <img src="https://render.githubusercontent.com/render/math?10^6"> - стоимость разработки. Дополнительные вычислительные мощности не требуются - необходимо серверное пространство для базы и контейнеров.
+<img src="https://render.githubusercontent.com/render/math?math=K = M \times 10^6,">
+где <img src="https://render.githubusercontent.com/render/math?math=M"> - количество месяцев на реализацию, <img src="https://render.githubusercontent.com/render/math?math=10^6"> - стоимость разработки. Дополнительные вычислительные мощности не требуются - необходимо серверное пространство для базы и контейнеров.
 
-<img src="https://render.githubusercontent.com/render/math?Капитальные затраты: минимум 3000000 руб. - максимум: 6000000 руб.
+```
+Капитальные затраты: минимум 3000000 руб. - максимум: 6000000 руб.
 Экономический эффект:
 	минимум 58813500 руб.
-	максимум: 69015000 руб.">
+	максимум: 69015000 руб.
+```
