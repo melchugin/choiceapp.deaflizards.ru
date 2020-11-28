@@ -197,7 +197,7 @@ print(result)
 # Экономический эффект
 Критерием эффективности создания и внедрения новых средств автоматизации является ожидаемый экономический эффект. Он определяется по формуле:
 
-<img src="https://render.githubusercontent.com/render/math?Э=Э_р-Е_н \times К_п,">
+<img src="https://render.githubusercontent.com/render/math?Э=Э_р-Е_н\times%20К_п,">
 
 где <img src="https://render.githubusercontent.com/render/math?Э"> - экономический эффект; <img src="https://render.githubusercontent.com/render/math?Э_р"> - годовая экономия; <img src="https://render.githubusercontent.com/render/math?Е_н"> - нормативный коэффициент (<img src="https://render.githubusercontent.com/render/math?E_н=[0.05...0.2]">); <img src="https://render.githubusercontent.com/render/math?К_п"> - капитальные затраты на проектирование и внедрение, включая первоначальную стоимость программы. Годовая экономия <img src="https://render.githubusercontent.com/render/math?Э_р"> складывается из экономии эксплуатационных расходов и экономии в связи с повышением производительности труда пользователя. Таким образом:
 
