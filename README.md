@@ -193,6 +193,24 @@ print(result)
 Файл со статистикой: `research/train_data/numeric_data_vacancies.csv`
 
 ## Аналитика по резюме
+Реализована функция совпадения текстов. Она использует следующие метрики: мера Жаккара (1) и косинусное расстояние (2), есть возможность подключить любую метрику для определения близости эмбеддингов (например из `sklearn.metrics`).
+
+<img src="https://render.githubusercontent.com/render/math?math=K_{{1,-1}}={\frac  {n(I\cap E)}{n(I)+n(E)-n(I\cap E)}}={\frac  {n(I\cap E)}{n(I\cup E)}};">&nbsp;&nbsp;&nbsp;&nbsp;(1)
+
+
+<img src="https://render.githubusercontent.com/render/math?math=cos(\theta)=\frac{\sum{(I \times E)}}{\sqrt{\sum{I^2} \times \sqrt{\sum{E^2}}}},">&nbsp;&nbsp;&nbsp;&nbsp;(2)
+
+где <img src="https://render.githubusercontent.com/render/math?math=K"> - коэффициент Жаккара, <img src="https://render.githubusercontent.com/render/math?math=I"> - гипотеза (текст резюме), <img src="https://render.githubusercontent.com/render/math?math=E"> - целевой текст (вакансии), <img src="https://render.githubusercontent.com/render/math?math=n( \cdot )"> - функция подсчета количества значений в эмбеддинге.
+
+Визуализация результата:
+![alt text](research/graphs/match.png "Match visualisation")
+
+Полученные данные возможно использовать при решении задачи матчинга "многие ко многим".
+
+Применение функции:
+```python
+matches = match_vacancies(test_data, test_res_data)
+```
 
 # Экономический эффект
 Критерием эффективности создания и внедрения новых средств автоматизации является ожидаемый экономический эффект. Он определяется по формуле:
