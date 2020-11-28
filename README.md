@@ -198,7 +198,7 @@ print(result)
 <img src="https://render.githubusercontent.com/render/math?math=K_{{1,-1}}={\frac  {n(I\cap E)}{n(I) %2B n(E)-n(I\cap E)}}={\frac  {n(I\cap E)}{n(I\cup E)}};">&nbsp;&nbsp;&nbsp;&nbsp;(1)
 
 
-<img src="https://render.githubusercontent.com/render/math?math=cos(\theta)=\frac{\sum{(I \times E)}}{\sqrt{\sum{I^2} \times \sqrt{\sum{E^2}}}},">&nbsp;&nbsp;&nbsp;&nbsp;(2)
+<img src="https://render.githubusercontent.com/render/math?math=cos(\theta)=\frac{\sum{(I \times E)}}{\sqrt{\sum{I^2}} \times \sqrt{\sum{E^2}}},">&nbsp;&nbsp;&nbsp;&nbsp;(2)
 
 где <img src="https://render.githubusercontent.com/render/math?math=K"> - коэффициент Жаккара, <img src="https://render.githubusercontent.com/render/math?math=I"> - гипотеза (текст резюме), <img src="https://render.githubusercontent.com/render/math?math=E"> - целевой текст (вакансии), <img src="https://render.githubusercontent.com/render/math?math=n( \cdot )"> - функция подсчета количества значений в эмбеддинге.
 
