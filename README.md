@@ -225,7 +225,7 @@ print(result)
 
 `Годовая экономия: 72015000 руб.`
 
-Нижняя граница <img src="https://render.githubusercontent.com/render/mathmath=?E_p">:
+Нижняя граница <img src="https://render.githubusercontent.com/render/math?math=E_p">:
 
 `Годовая экономия: 64813500 руб.`
 
