@@ -1,5 +1,6 @@
 FROM node:15.3-stretch
 
+#Set label for docker-registry
 LABEL org.opencontainers.image.source https://github.com/melchugin/choiceapp.deaflizards.ru
 
 # Enable russian locale
@@ -17,8 +18,12 @@ ENV LANG=en_US.UTF-8
 # Set timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
+#Prepare application files
 WORKDIR /app
 COPY . .
+
+#Install application
 RUN npm install --production
 
+#Run application
 CMD ["npm", "start"]

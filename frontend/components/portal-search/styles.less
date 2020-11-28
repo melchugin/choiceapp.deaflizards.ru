@@ -1,0 +1,73 @@
+@import '../../styles/variables.less';
+
+.wrapper {
+    background: #ffffff;
+    padding: 14px 24px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    height: 50%;
+    transform: translate(-7%, -50%);
+    width: 560px;
+    height: 533px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12), 0px 16px 16px rgba(0, 0, 0, 0.16);
+    border-radius: 12px;
+}
+
+.caption {
+    font-size: 23px;
+    line-height: 28px;
+    margin: 0;
+    padding-bottom: 18px;
+}
+
+.list {
+    list-style: none;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+    padding-top: 18px;
+    flex-grow: 1;
+
+    &Item {
+        font-size: 16px;
+        letter-spacing: 0.1px;
+        line-height: 20px;
+        padding: 11px 5px;
+        border-radius: 3px;
+        cursor: pointer;
+
+        &:hover {
+            background: @light-field-color;
+        }
+    }
+}
+
+.button {
+    background: #5965B3;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #ffffff;
+    cursor: pointer;
+    align-self: flex-end;
+    justify-self: flex-end;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    line-height: 20px;
+    border: none;
+}
+
+.closeButton {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 21px;
+    color: white;
+    position: absolute;
+    top: 14px;
+    right: -40px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
