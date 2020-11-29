@@ -28,8 +28,8 @@ Router.get('/vacancies', (req, res) => {
         inner join resume b
             on a.id = b.position_id
         group by a.id, a.name
+        having count(*) < 100
         order by count(*) desc
-        limit 60
     `, [])
         .then(rows => {
             res.json({...rows});

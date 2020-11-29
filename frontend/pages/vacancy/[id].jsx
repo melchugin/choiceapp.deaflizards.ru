@@ -33,12 +33,13 @@ const VacancyPage = (props) => {
     const [newResponses, setNewResponses] = React.useState([]);
     const [watchedResponses, setWatchedResponses] = React.useState([]);
     const [ pageTitle, setPageTitle ]= React.useState('');
+    const random = Math.random() * 10 + 1;
 
     React.useState(() => {
         const fn = async () => {
             const rows = await getData(`/api/v1/vacancy/${props.id}`);
-            setNewResponses(rows ? rows.rows.slice(0, 7).sort((a,b) => b.percent - a.percent) : []);
-            setWatchedResponses(rows ? rows.rows.slice(8).sort((a,b) => b.percent - a.percent) : []);
+            setNewResponses(rows ? rows.rows.slice(0, random).sort((a,b) => b.percent - a.percent) : []);
+            setWatchedResponses(rows ? rows.rows.slice(random+1).sort((a,b) => b.percent - a.percent) : []);
             setPageTitle(rows ? rows.rows[0].name : []);
         };
         fn();
