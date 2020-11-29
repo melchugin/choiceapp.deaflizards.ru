@@ -18,8 +18,8 @@ const photoSrc = [
 const VacancyCard = (props) =>
     <div className={css.wrapper}>
         <div className={css.info}>
-            <h4 className={css.title}>{props.title}</h4>
-            <span className={css.additional}>{props.additional}</span>
+            <h4 className={css.title}>{props.name}</h4>
+            <span className={css.additional}>Откликов {props.responses}</span>
         </div>
         <div className={css.photosWrapper}>
         <AvatarGroup max={4}>

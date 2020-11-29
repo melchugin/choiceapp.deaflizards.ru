@@ -1,8 +1,10 @@
 import React from 'react';
+import { getData } from '../../lib/request';
 
 import Layout from '../../components/layout';
 import AppMenu from '../../components/app-menu';
 import VacancyDescription from '../../components/vacancy-description';
+import SideMenu from '../../components/side-menu';
 
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
@@ -11,10 +13,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Badge from '@material-ui/core/Badge';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -30,16 +28,30 @@ import withLink from '../../components/hocs/withLink';
 
 import responsesMock from '../../mocks/responses';
 
-const VacancyPage = () => {
+const VacancyPage = (props) => {
     const [ currentPage, setCurrentPage ]= React.useState(0);
-    const [newResponses, setNewResponses] = React.useState(responsesMock().new);
-    const [watchedResponses, setWatchedResponses] = React.useState(responsesMock().watched);
-    React.useEffect(() => {
-        setNewResponses(newResponses.sort((a,b) => b.percentage - a.percentage));
-        setWatchedResponses(watchedResponses.sort((a,b) => b.percentage - a.percentage));
+    const [newResponses, setNewResponses] = React.useState([]);
+    const [watchedResponses, setWatchedResponses] = React.useState([]);
+    const [ pageTitle, setPageTitle ]= React.useState('');
+
+    React.useState(() => {
+        const fn = async () => {
+            const rows = await getData(`/api/v1/vacancy/${props.id}`);
+            setNewResponses(rows ? rows.rows.slice(0, 7).sort((a,b) => b.percent - a.percent) : []);
+            setWatchedResponses(rows ? rows.rows.slice(8).sort((a,b) => b.percent - a.percent) : []);
+            setPageTitle(rows ? rows.rows[0].name : []);
+        };
+        fn();
     }, []);
+
+    const sideMenuItems = [
+        {name: `Отклики ${newResponses.length + watchedResponses.length}`, icon: AllInboxIcon},
+        {name: 'Описание вакансии', icon: InfoIcon},
+        {name: 'Тестовые задания', icon: BusinessCenterIcon},
+        {name: 'Контактное лицо', icon: PersonIcon},
+    ];
     return (
-        <Layout return={true} pageTitle="iOS-разработчик" addButton={false}>
+        <Layout return={true} pageTitle={pageTitle} addButton={false}>
                 <AppMenu />
                 <div className={css.pageWrapper}>
                     <Box paddingTop={2} paddingBottom={2}>
@@ -57,7 +69,7 @@ const VacancyPage = () => {
                             />
                         </FormControl>
                     </Box>
-                    <Box maxHeight="75vh" overflow="scroll">
+                    <Box maxHeight="75vh" overflow="auto">
                         <Badge badgeContent={newResponses.length} anchorOrigin={{
                                                                     vertical: 'bottom',
                                                                     horizontal: 'right',
@@ -71,44 +83,13 @@ const VacancyPage = () => {
                             {watchedResponses.map(renderResponses)}
                     </Box>
                 </div>
-                <SideMenu page={currentPage} setPage={setCurrentPage} responsesCount={newResponses.length + watchedResponses.length}/>
+                <SideMenu page={currentPage} setPage={setCurrentPage} items={sideMenuItems}/>
         </Layout>
     );
 }
 
-const SideMenu = (props) => {
-    return (
-        <List component="div">
-            <ListItem button selected={props.page === 0} onClick={() => props.setPage(0)}>
-            <ListItemIcon>
-                <AllInboxIcon style={{color: '#17AAD9'}}/>
-            </ListItemIcon>
-            <ListItemText primary={`Отклики ${props.responsesCount}`} style={{color: 'black'}}/>
-            </ListItem>
-            <ListItem button selected={props.page === 1} onClick={() => props.setPage(1)}>
-            <ListItemIcon>
-                <InfoIcon style={{color: '#17AAD9'}}/>
-            </ListItemIcon>
-            <ListItemText primary="Описание вакансии" style={{color: 'black'}}/>
-            </ListItem>
-            <ListItem button selected={props.page === 2} onClick={() => props.setPage(2)}>
-            <ListItemIcon>
-                <BusinessCenterIcon style={{color: '#17AAD9'}}/>
-            </ListItemIcon>
-            <ListItemText primary="Тестовые задания" style={{color: 'black'}}/>
-            </ListItem>
-            <ListItem button selected={props.page === 3} onClick={() => props.setPage(3)}>
-            <ListItemIcon>
-                <PersonIcon style={{color: '#17AAD9'}}/>
-            </ListItemIcon>
-            <ListItemText primary="Контактное лицо" style={{color: 'black'}}/>
-            </ListItem>
-        </List>
-    )
-};
-
 const renderResponses = (response, i) => {
-    const LinkedButton = withLink(Response, '/response/'+response.id);
+    const LinkedButton = withLink(Response, '/response/'+response.resume_id);
     return (
         <Box display='flex' alignItems='center' justifyContent="space-between" paddingTop={2} key={i}>
             <LinkedButton {...response}/>
@@ -120,13 +101,13 @@ const renderResponses = (response, i) => {
 };
 
 const Response = (props) => {
-    const color = props.percentage > 50 ? props.percentage > 70 ? '#4BB34B' : '#FFA000' : '#818C99';
+    const color = props.percent > 50 ? props.percent > 70 ? '#4BB34B' : '#FFA000' : '#818C99';
     return <Box display='flex' alignItems='center'>
         <Avatar src={props.photo} style={{ width: '48px', height: '48px'}}/>
         <Box paddingLeft={1} display='flex' align-items='center' justifyContent="space-between">
             <Box>
                 <Typography variant="subtitle1">{props.name}</Typography>
-                <Typography variant="caption" style={{ color }}>Подходит на {props.percentage}%</Typography>
+                <Typography variant="caption" style={{ color }}>Подходит на {props.percent}%</Typography>
             </Box>
         </Box>
     </Box>
@@ -138,6 +119,10 @@ const buttonSwitcher = (value) => {
         case 0: return <Button style={{ color: '#17AAD9'}}>Отправить тестовое</Button>;
         case -1: return <Button disabled style={{ color: '#E64646'}}>Отказано</Button>;
     }
+};
+
+VacancyPage.getInitialProps = (ctx) => {
+    return {id: ctx.query.id}
 };
 
 export default VacancyPage;

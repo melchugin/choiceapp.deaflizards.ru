@@ -13,8 +13,8 @@ ENV LANG=en_US.UTF-8
 WORKDIR /app
 COPY . .
 
-#Install application
-RUN npm install --production
+#Install and build application
+RUN npm install --production && npm run build
 
 #Run application
 CMD ["npm", "start"]
