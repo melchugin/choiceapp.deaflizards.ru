@@ -1,0 +1,59 @@
+@import '../../styles/variables';
+
+.wrapper {
+    padding: 15px 0;
+    border-bottom: 1px solid #D7D8D9;   
+}
+
+.caption {
+    margin: 0;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    padding-bottom: 16px;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 7px 0;
+
+    & span {
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.1px;
+        margin-left: 10px;
+    }
+}
+
+.score {
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.2px;
+    width: 38px;
+    height: 38px;
+    background: @light-field-color;
+    border-radius: 50%;
+
+    & span {
+        width: 32px;
+        height: 32px;
+        background: white;
+        padding: 0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        display: none;
+    }
+}

@@ -1,0 +1,32 @@
+@import '../../styles/variables.less';
+
+.wrapper {
+
+}
+
+.caption {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    margin-bottom: 13px;
+}
+
+.list {
+    list-style: none;
+
+    &Item {
+        font-size: 13px;
+        letter-spacing: 0.2px;
+        line-height: 18px;
+        padding: 4px 0;
+
+        &::before {
+            content: "\2022";
+            color: @primary-color;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    }
+}

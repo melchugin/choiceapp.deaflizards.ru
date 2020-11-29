@@ -1,21 +1,54 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { getData } from '../lib/request';
 
-const BACKEND = "http://choiceapp-backend:3000";
+import Layout from '../components/layout';
+import AppMenu from '../components/app-menu';
+import VacancyCard from '../components/vacancy-card';
+import RecentContacts from '../components/recent-contacts';
+import Snackbar from '@material-ui/core/Snackbar';
 
-const MainPage = () => {
-    const [data, setData] = useState('Waiting...')
-    useEffect(() => {
-        setTimeout(() => axios.post(BACKEND + '/api/v1/test_get', { data_id: 1 })
-            .then(res => setData(JSON.stringify(res.data)))
-            .catch(console.log.bind(null, 'Error on axios'))
-            , 1500);
+import withLink from '../components/hocs/withLink';
+
+import '../styles/global.less';
+import css from '../styles/regular.less';
+
+import recentContactsMock from '../mocks/recent-contacts';
+
+const MainPage = (props) => {
+    const [ vacancies, setVacancies ] = React.useState([]);
+    const [ open, setOpen ] = React.useState(props.created ? true : false);
+
+    React.useState(() => {
+        const fn = async () => {
+            const rows = await getData('/api/v1/vacancies');
+            setVacancies(rows ? rows.rows : []);
+        };
+        fn();
     }, []);
-    return (
-        <div>
-            <h1>{data}</h1>
-        </div>
-    );
+
+    return <Layout return={false} pageTitle="Вакансии" addButton={true}>
+            <AppMenu />
+            <div className={css.pageWrapper}>
+                {vacancies.slice(0, 50).map(renderVacancy(props))}
+            </div>
+            <RecentContacts contacts={recentContactsMock()}/>
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                open={open}
+                message="Вакансия создана"
+                onClose={() => setOpen(false)}
+                />
+    </Layout>
+}
+
+const renderVacancy = (props) => (item, i) => {
+    const VacancyCardWithLink = withLink(VacancyCard, `/vacancy/${item.id}`);
+    return <VacancyCardWithLink {...item}/>
+};
+
+MainPage.getInitialProps = (ctx) => {
+    const { query = {} } = ctx;
+    return { ...query };
 };
 
 export default MainPage;

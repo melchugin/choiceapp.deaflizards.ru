@@ -1,7 +1,7 @@
 {
-  "name": "iface-backend",
+  "name": "choiceapp-backend",
   "version": "1.0.0",
-  "description": "iFace recognitions",
+  "description": "ChoiceAap Hackathon",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -10,11 +10,9 @@
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "nodemon": "^1.19.1",
-    "formidable": "^1.2.2",
-    "body-parser": "^1.19.0",
-    "fs-extra": "^9.0.0",
-    "path": "^0.12.7"
+    "pg": "^8.5.1",
+    "pg-pool": "^3.2.2"
   },
   "author": "Yury Lunev",
-  "license": "BSD"
+  "license": "GPL3"
 }
