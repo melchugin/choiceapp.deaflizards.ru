@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import css from './style.less';
 
-const AppMenu = () => 
+const AppMenu = () =>
     <ul className={css.list}>
         <Link href="/">
             <li className={css.item}>
@@ -11,18 +11,14 @@ const AppMenu = () =>
                 <a>Вакансии</a>
             </li>
         </Link>
-        <Link href="/people">
             <li className={css.item}>
                 <img src="/icons/people.svg" />
-                <a>Люди</a>
+                <div>Люди</div>
             </li>
-        </Link>
-        <Link href="/mail">
             <li className={css.item}>
                 <img src="/icons/mail.svg" />
-                <a>Сообщения</a>
+                <div>Сообщения</div>
             </li>
-        </Link>
     </ul>
 
 export default AppMenu;

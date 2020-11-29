@@ -23,16 +23,18 @@ const Header = (props) => (
                     {props.return && <ReturnWithLink />}
                     <h4 className={css.pageTitle}>{props.pageTitle}</h4>
                 </div>
-                {props.addButton && 
+                {props.addButton &&
                     <ButtonWithLink text="Создать вакансию">
                         <AddIcon />
                     </ButtonWithLink>}
             </div>
             <div className={css.user}>
+                <div className={css.userField}>
                 <span className={css.username}>
                     Кирилл Сидорец
                 </span>
                 <img src="/profile_photo.png" className={css.userphoto}/>
+                </div>
             </div>
             </header>
         </div>

@@ -22,8 +22,8 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 WORKDIR /app
 COPY . .
 
-#Install application
-RUN npm install --production
+#Install and build application
+RUN npm install --production && npm run build
 
 #Run application
 CMD ["npm", "start"]
