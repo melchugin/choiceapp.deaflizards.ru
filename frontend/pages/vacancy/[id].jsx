@@ -34,7 +34,7 @@ const VacancyPage = (props) => {
     const [watchedResponses, setWatchedResponses] = React.useState([]);
     const [ pageTitle, setPageTitle ]= React.useState('');
     const random = Math.random() * 10 + 1;
-
+//
     React.useState(() => {
         const fn = async () => {
             const rows = await getData(`/api/v1/vacancy/${props.id}`);
