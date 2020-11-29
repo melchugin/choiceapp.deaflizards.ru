@@ -85,6 +85,18 @@ const pageSwitcher = (props) => (current) => {
 
 const CandidateInfo = (props) => {
     const [ expandLetter, setExpandLetter ] = React.useState(false);
+    const text = 'Хотелось бы работать в развивающейся компании. Надоела прошлая тупая работа, одна ненависть!'
+        .split(' ')
+        .map(word => {
+            if (posWords.includes(word)) {
+                return `<span style="color: green;">${word}</span>`
+            } else if (negWords.includes(word)) {
+                return `<span style="color: red;">${word}</span>`
+            } else {
+                return word
+            }
+        })
+        .join(' ');
     return (
         <>
             <Box display="flex" alignItems="center" flexDirection="column" margin={3}>
@@ -124,6 +136,12 @@ const CandidateInfo = (props) => {
                     <Avatar src="/icons/fire.svg" />
                     <Typography variant="subtitle2" >Токсичность</Typography>
                     <LinearProgressWithCaption value={props.toxicity}/>
+                </Box>
+                <Box display="flex" mt={2} mb={4} style={{ background: "#F5F5F5", borderRadius: "10px" }}>
+                    <Box display="flex" flexDirection="column" alignItems="flex-start" paddingLeft={2}>
+                        <Typography variant="subtitle1">Анализ текста</Typography>
+                        <Typography gutterBottom variant="caption" dangerouslySetInnerHTML={{__html: text}}></Typography>
+                    </Box>
                 </Box>
                 <Box display="grid" gridTemplateColumns="32px 1fr 1fr" style={{ gap: '12px'}} alignItems="center" mt={2} mb={2}>
                     <Avatar src="/icons/compass.svg" />
@@ -253,3 +271,6 @@ ResponsePage.getInitialProps = (ctx) => {
 };
 
 export default ResponsePage;
+
+const posWords = ['развивающейся', 'компании.', 'работать'];
+const negWords = ['тупая', 'ненависть!'];

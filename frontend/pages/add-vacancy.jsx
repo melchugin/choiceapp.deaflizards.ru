@@ -13,7 +13,7 @@ import withOpen from '../components/hocs/withOpen';
 import '../styles/global.less';
 import regCss from '../styles/regular.less';
 import css from './add-vacancy.less';
-
+//
 import demands from '../mocks/demands';
 
 import Radio from '@material-ui/core/Radio';
@@ -46,7 +46,7 @@ const AddVacancy = (props) => {
     const [ phone, setPhone ] = React.useState('');
     const [ workType, setWorkType ] = React.useState('full');
     const [ description, setDescription ] = React.useState('');
-    const [ demands, setDemands ] = React.useState({items: ['']});
+    const [ demands, setDemands ] = React.useState({caption: 'Требования', items: ['']});
     const [ salary, setSalary ] = React.useState('');
     const [ workExperience, setWorkExperience ] = React.useState('');
     const [ education, setEducation ] = React.useState('');
@@ -299,8 +299,8 @@ const Education = (props) => {
 };
 
 const Demands = (props) => {
-    const addDemand = () => () => props.setDemands([...props.demands, '']);
-    const removeDemand = (i) => () => props.setDemands(props.demands.filter((v, index) => i !== index));
+    const addDemand = () => () => props.setDemands({caption: props.demands.caption, items: [...props.demands.items, '']});
+    const removeDemand = (i) => () => props.setDemands({caption: props.demands.caption, items: [props.demands.items.filter((v, index) => i !== index)]});
     return (
         <div className={css.demandWrapper}>
             <EditableList
